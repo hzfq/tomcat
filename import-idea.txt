@@ -1,0 +1,35 @@
+1.开发环境准备
+    jdk 1.8及以上
+    ant 1.10.7及以上
+    idea 2020.1,其他版本均可
+    win10
+2.配置环境变量
+    JAVA_HOME: d:/tool/jdk8, jdk二进制安装目录
+    ANT_HOME: d:/tool/ant, ant二进制安装目录
+    PATH: %ANT_HOME%\bin;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+    CLASSPATH: .;%JAVA_HOME%\lib;%JAVA_HOME%\jre\lib;%ANT_HOME%\lib;
+    查看配置是否成功：
+        ant -version
+        java -version
+    依次输出软件版本为安装版本，则配置成功
+3.下载代码
+    git clone --depth=1 https://github.com/hzfq/tomcat.git
+4.修改build.properties文件的base.path值为tomcat源码下的libs目录，采用绝对路径，如
+    base.path=D:/projects/git/tomcat/libs
+5.编译代码,依次执行下面两条命令
+    ant
+    ant ide-intellij
+6.导入idea,点击File->New->Project from Existing Sources,选择下载的tomcat源码目录,
+  点击OK,选择Create project from existing sources,然后一直选择next,最后点击finish
+7.配置项目的jdk和ant-lib,在idea左侧的project中,选中项目名tomcat,单击右键,在右键菜单
+  中点击Open Module Settings
+  ①project sdk选择jdk8
+  ②project language level选择8
+  ③Modules->tomcat->Dependencies,导入ant安装目录下的lib目录,选中export,点击apply,
+    点击ok,项目配置完成
+8.编译和运行tomcat源码
+    项目右键rebuild module 'tomcat',完成后
+    运行java/org/apache/catalina/startup/Bootstrap类的main方法,
+    控制台打印启动日志,启动完成后,浏览器打开localhost:8080,
+    出现tomcat管理页面,源码启动成功
+9.控制台报错是webapps/examples导致，不予理会或将examples目录删除即可
