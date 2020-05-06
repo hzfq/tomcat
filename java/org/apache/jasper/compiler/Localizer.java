@@ -16,15 +16,15 @@
  */
 package org.apache.jasper.compiler;
 
+import org.apache.jasper.runtime.ExceptionUtils;
+
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.apache.jasper.runtime.ExceptionUtils;
-
 /**
- * Class responsible for converting error codes to corresponding localized
- * error messages.
+ * Class responsible for converting error codes to corresponding localized error messages.
  *
  * @author Jan Luehe
  */
@@ -59,6 +59,9 @@ public class Localizer {
             }
         } catch (MissingResourceException e) {
         }
+        //Console garbled，控制台乱码
+        errMsg = new String(errMsg.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+
         return errMsg;
     }
 
